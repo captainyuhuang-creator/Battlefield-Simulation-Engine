@@ -1,4 +1,4 @@
-# Battlefield Simulation & AI Logic Engine
+# Battlefield Simulation Engine
 
 A text-based combat simulation written in Java using object-oriented design. A standard 54-card deck (52 cards + 2 Jokers) is turned into two armies of 27 heavily armored soldiers who fight until one side is wiped out.
 
