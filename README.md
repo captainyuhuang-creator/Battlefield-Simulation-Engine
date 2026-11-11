@@ -35,8 +35,8 @@ The program simulates a balanced 27-vs-27 total war matrix modeled directly on p
 
 | Faction Name | Suite Representation | Roster Breakdown per Side (27 Total) |
 | :--- | :--- | :--- |
-| **The Crimson Dynasty** | ❤️ Hearts / ♦️ Diamonds | 1 Emperor, 2 Royal Guards (A), 6 Elite Generals (K/Q/J), 4 Armored Elephants (10/2), 4 Cavalry (3/9), 10 Heavy Infantry (4-8) |
-| **The Obsidian Kingdom** | ♠️ Spades / ♣️ Clubs | 1 Emperor, 2 Royal Guards (A), 6 Elite Generals (K/Q/J), 4 Armored Elephants (10/2), 4 Cavalry (3/9), 10 Heavy Infantry (4-8) |
+| **The Crimson Dynasty** | ❤️ Hearts / ♦️ Diamonds | 1 Emperor (Joker), 2 Royal Guards (Ace), 6 Elite Generals (King/Queen/Jack), 4 Armored Elephants (10/2), 4 Cavalry (3/9), 10 Heavy Infantry (4-8) |
+| **The Obsidian Kingdom** | ♠️ Spades / ♣️ Clubs | 1 Emperor (Joker), 2 Royal Guards (Ace), 6 Elite Generals (King/Queen/Jack), 4 Armored Elephants (10/2), 4 Cavalry (3/9), 10 Heavy Infantry (4-8) |
 
 ---
 
@@ -51,9 +51,9 @@ Core AI Protocols: Royal Protection Enabled | RNG Battlefields | Tactical Retrea
 🔴 Crimson Dynasty: 1/27 Active | ⚫ Obsidian Kingdom: 8/27 Active
 ----------------------------------------------------------------------
 👑 THE MONARCH STANDS ALONE! The Crimson Dynasty's Emperor draws his blade for a final last stand!
-⚔️ SKIRMISH INITIALIZED: [The Crimson Dynasty - Emperor (Monarch)] vs [The Obsidian Kingdom - Heavy Infantry (4-8)]
+⚔️ SKIRMISH INITIALIZED: [The Crimson Dynasty - Emperor (Joker)] vs [The Obsidian Kingdom - Heavy Infantry (4-8)]
 CLANG! CLANG! CLANG! 
-💥 ARMOR COMPROMISED! The Crimson Dynasty [Emperor (Monarch)] drives a lethal blade piercing through the armor gap!
+💥 ARMOR COMPROMISED! The Crimson Dynasty [Emperor (Joker)] drives a lethal blade piercing through the armor gap!
 💀 The Obsidian Kingdom [Heavy Infantry (4-8)] [KIA - Card Flipped Face-Down Into Graveyard Area]
 ```
 
