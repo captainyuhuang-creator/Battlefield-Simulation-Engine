@@ -61,6 +61,7 @@ From the 4th exchange of a skirmish, there is a 25% chance per exchange that a r
 ## Project Structure
 
 ```text
+Battlefield-AI-Simulation-Engine/
 ├── PlayingCardWarGame.java   # Entry point: creates both armies and starts the war
 ├── Battle.java               # Combat engine: attacks, combat modes, retreats, skirmishes, war loop
 ├── Army.java                 # Roster management, alive counts, combatant and target selection
