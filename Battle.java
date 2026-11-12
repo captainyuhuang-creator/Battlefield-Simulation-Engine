@@ -15,6 +15,7 @@ public class Battle {
         if (delayMs < 0) {
             throw new IllegalArgumentException("Delay must not be negative.");
         }
+        
         this.rand = rand;
         this.out = out;
         this.delayMs = delayMs;
@@ -26,7 +27,8 @@ public class Battle {
         }
         try {
             Thread.sleep(ms);
-        } catch (InterruptedException e) {
+        } 
+        catch (InterruptedException e) {
             Thread.currentThread().interrupt();
         }
     }
@@ -42,16 +44,21 @@ public class Battle {
         if (!defender.isAlive()) {
             throw new IllegalStateException("Cannot attack a defeated soldier.");
         }
+        
         int damage = attacker.getRank().getSpeed();
+        
         defender.takeDamage(damage);
-        out.println(attacker.getTeam() + " [" + attacker.getRank().getDisplayName()
+        
+        System.out.println(attacker.getTeam() + " [" + attacker.getRank().getDisplayName()
                 + "] attacks " + defender.getTeam() + " ["
                 + defender.getRank().getDisplayName() + "] for " + damage + " damage!");
+        
         if (!defender.isAlive()) {
-            out.println("💥 ARMOR COMPROMISED! " + defender.getTeam() + " ["
+            System.out.println("💥 ARMOR COMPROMISED! " + defender.getTeam() + " ["
                     + defender.getRank().getDisplayName() + "] is defeated!");
-        } else {
-            out.println("🛡️ Remaining Armor: " + defender.getCurrentArmor()
+        } 
+        else {
+            System.out.println("🛡️ Remaining Armor: " + defender.getCurrentArmor()
                     + "/" + defender.getRank().getMaxArmor());
         }
     }
@@ -64,30 +71,40 @@ public class Battle {
         if (!p1.isAlive() || !p2.isAlive()) {
             throw new IllegalStateException("Both combatants must be alive.");
         }
+        
         AttackMode mode = AttackMode.values()[rand.nextInt(AttackMode.values().length)];
-        out.println("\n⚔️ COMBAT MODE: " + mode);
+        
+        System.out.println("\n⚔️ COMBAT MODE: " + mode);
+        
         pause(100);
 
         switch (mode) {
             case SINGLE_SIDED:
-                out.println("🗡️ ONE SOLDIER STRIKES!");
-                if (rand.nextBoolean()) {
+            	System.out.println("🗡️ ONE SOLDIER STRIKES!");
+                
+            	if (rand.nextBoolean()) {
                     attack(p1, p2);
-                } else {
+                } 
+                else {
                     attack(p2, p1);
                 }
+                
                 break;
 
             case SIMULTANEOUS:
-                out.println("⚡ BOTH SOLDIERS SWING THEIR SWORDS SIMULTANEOUSLY!");
-                int damageToP1 = p2.getRank().getSpeed();
+            	System.out.println("⚡ BOTH SOLDIERS SWING THEIR SWORDS SIMULTANEOUSLY!");
+                
+            	int damageToP1 = p2.getRank().getSpeed();
                 int damageToP2 = p1.getRank().getSpeed();
+                
                 p1.takeDamage(damageToP1);
                 p2.takeDamage(damageToP2);
-                out.println(p1.getTeam() + " [" + p1.getRank().getDisplayName()
+                
+                System.out.println(p1.getTeam() + " [" + p1.getRank().getDisplayName()
                         + "] receives " + damageToP1 + " damage.");
-                out.println(p2.getTeam() + " [" + p2.getRank().getDisplayName()
+                System.out.println(p2.getTeam() + " [" + p2.getRank().getDisplayName()
                         + "] receives " + damageToP2 + " damage.");
+                
                 if (!p1.isAlive()) {
                     out.println("💥 " + p1.getTeam() + " [" + p1.getRank().getDisplayName() + "] is defeated!");
                 }
@@ -97,28 +114,38 @@ public class Battle {
                 if (!p1.isAlive() && !p2.isAlive()) {
                     out.println("☠️ DOUBLE KNOCKOUT! BOTH SOLDIERS FALL!");
                 }
+                
                 break;
 
             case ALTERNATING:
-                out.println("🔄 SOLDIERS TAKE TURNS ATTACKING!");
-                Soldier first;
+            	System.out.println("🔄 SOLDIERS TAKE TURNS ATTACKING!");
+                
+            	Soldier first;
                 Soldier second;
+                
                 if (rand.nextBoolean()) {
                     first = p1;
                     second = p2;
-                } else {
+                } 
+                else {
                     first = p2;
                     second = p1;
                 }
-                out.println("🏹 First attacker: " + first.getTeam()
+                
+                System.out.println("🏹 First attacker: " + first.getTeam()
                         + " [" + first.getRank().getDisplayName() + "]");
+                
                 attack(first, second);
+                
                 if (first.isAlive() && second.isAlive()) {
-                    out.println("⚔️ COUNTERATTACK!");
-                    attack(second, first);
-                } else {
-                    out.println("🚫 Counterattack cancelled. The defeated soldier cannot retaliate.");
+                	System.out.println("⚔️ COUNTERATTACK!");
+                    
+                	attack(second, first);
+                } 
+                else {
+                	System.out.println("🚫 Counterattack cancelled. The defeated soldier cannot retaliate.");
                 }
+                
                 break;
         }
     }
@@ -128,6 +155,7 @@ public class Battle {
         if (soldier == null || army == null) {
             throw new IllegalArgumentException("Soldier and army must not be null.");
         }
+        
         return soldier.isAlive()
                 && (soldier.getRank() == Rank.GENERAL || soldier.getRank() == Rank.ELEPHANT)
                 && army.getAliveCount() < RETREAT_ARMY_LIMIT;
@@ -142,50 +170,69 @@ public class Battle {
             throw new IllegalStateException("Both soldiers must be alive to retreat.");
         }
 
-        out.println("\n🔄 TACTICAL RETREAT! " + ownArmy.getName() + " ["
+        System.out.println("\n🔄 TACTICAL RETREAT! " + ownArmy.getName() + " ["
                 + retreating.getRank().getDisplayName() + "] attempts to withdraw!");
 
         if (!rand.nextBoolean()) {
-            out.println("❌ RETREAT FAILED! The enemy catches "
+        	System.out.println("❌ RETREAT FAILED! The enemy catches "
                     + retreating.getRank().getDisplayName() + " before it can escape!");
-            out.println("🏹 ENEMY COUNTERATTACK!");
-            attack(enemy, retreating);
-            return false;
+        	System.out.println("🏹 ENEMY COUNTERATTACK!");
+            
+        	attack(enemy, retreating);
+            
+        	return false;
         }
 
-        out.println("✅ RETREAT SUCCESSFUL! The soldier breaks formation.");
+        System.out.println("✅ RETREAT SUCCESSFUL! The soldier breaks formation.");
+        
         int outcome = rand.nextInt(3);
 
         if (outcome == 0) {
-            out.println("🛡️ CLEAN ESCAPE! The soldier reaches the rear safely.");
-            out.println("✨ NO CASUALTIES! The retreat succeeds without losses.");
-            return true;
-        } else if (outcome == 1) {
-            out.println("🏹 ENEMY PURSUIT MODE! The enemy chases the retreating soldier!");
-            attack(enemy, retreating);
-            if (retreating.isAlive()) {
-                out.println("⚠️ RETREAT COMPLETED WITH DAMAGE! "
+        	System.out.println("🛡️ CLEAN ESCAPE! The soldier reaches the rear safely.");
+        	System.out.println("✨ NO CASUALTIES! The retreat succeeds without losses.");
+            
+        	return true;
+        } 
+        else if (outcome == 1) {
+        	System.out.println("🏹 ENEMY PURSUIT MODE! The enemy chases the retreating soldier!");
+            
+        	attack(enemy, retreating);
+            
+        	if (retreating.isAlive()) {
+        		System.out.println("⚠️ RETREAT COMPLETED WITH DAMAGE! "
                         + retreating.getRank().getDisplayName() + " escapes with reduced armor.");
-                return true;
+                
+        		return true;
             }
-            out.println("💀 RETREAT INTERCEPTED! The soldier is eliminated.");
-            return false;
-        } else {
-            out.println("⚔️ AGGRO REDIRECTION! The enemy changes its target.");
-            Soldier target = ownArmy.getRandomAliveInfantry(rand);
+            
+        	System.out.println("💀 RETREAT INTERCEPTED! The soldier is eliminated.");
+            
+        	return false;
+        } 
+        else {
+        	System.out.println("⚔️ AGGRO REDIRECTION! The enemy changes its target.");
+            
+        	Soldier target = ownArmy.getRandomAliveInfantry(rand);
+            
+        	if (target == null) {
+        		System.out.println("⚠️ NO SURVIVING INFANTRY! Enemy AI searches for another target.");
+                
+        		target = ownArmy.getRandomAliveNonEmperor(retreating, rand);
+            }
             if (target == null) {
-                out.println("⚠️ NO SURVIVING INFANTRY! Enemy AI searches for another target.");
-                target = ownArmy.getRandomAliveNonEmperor(retreating, rand);
+            	System.out.println("🛡️ NO ELIGIBLE TARGET! The enemy cannot redirect its attack.");
+            	System.out.println("✨ RETREAT COMPLETED WITHOUT CASUALTIES.");
+                
+            	return true;
             }
-            if (target == null) {
-                out.println("🛡️ NO ELIGIBLE TARGET! The enemy cannot redirect its attack.");
-                out.println("✨ RETREAT COMPLETED WITHOUT CASUALTIES.");
-                return true;
-            }
-            out.println("🎯 NEW TARGET ACQUIRED: " + ownArmy.getName()
+            
+            System.out.println("🎯 NEW TARGET ACQUIRED: " + ownArmy.getName()
                     + " [" + target.getRank().getDisplayName() + "]");
+            
             attack(enemy, target);
-            out.println("🏃 " + retreating.getRank().getDisplayName() + " successfully reaches the rear.");
+            
+            System.out.println("🏃 " + retreating.getRank().getDisplayName() + " successfully reaches the rear.");
+            
             return true;
         }
     }
@@ -194,14 +241,17 @@ public class Battle {
     public void runSkirmish(Soldier p1, Army redArmy, Soldier p2, Army blackArmy) {
         p1.resetArmor();
         p2.resetArmor();
-        out.println("\n⚔️ SKIRMISH INITIALIZED: [" + redArmy.getName() + " - "
+        
+        System.out.println("\n⚔️ SKIRMISH INITIALIZED: [" + redArmy.getName() + " - "
                 + p1.getRank().getDisplayName() + "] vs [" + blackArmy.getName()
                 + " - " + p2.getRank().getDisplayName() + "]");
 
         int hits = 0;
+        
         while (p1.isAlive() && p2.isAlive()) {
             hits++;
-            out.println("\n========== COMBAT EXCHANGE " + hits + " ==========");
+            
+            System.out.println("\n========== COMBAT EXCHANGE " + hits + " ==========");
 
             if (hits > 3 && rand.nextDouble() < 0.25) {
                 boolean redCan = canAttemptRetreat(p1, redArmy);
@@ -209,26 +259,30 @@ public class Battle {
 
                 if (redCan || blackCan) {
                     boolean redRetreats = (redCan && blackCan) ? rand.nextBoolean() : redCan;
+                    
                     Soldier retreating = redRetreats ? p1 : p2;
                     Soldier enemy = redRetreats ? p2 : p1;
                     Army ownArmy = redRetreats ? redArmy : blackArmy;
 
                     if (attemptTacticalRetreat(retreating, ownArmy, enemy)) {
-                        out.println("🏳️ SKIRMISH ENDED: " + retreating.getRank().getDisplayName()
+                    	System.out.println("🏳️ SKIRMISH ENDED: " + retreating.getRank().getDisplayName()
                                 + " has withdrawn from the battlefield.");
-                        break;
+                        
+                    	break;
                     }
                 }
             }
 
             if (p1.isAlive() && p2.isAlive()) {
-                out.println("\nCLANG! ⚔️");
-                pause(100);
-                executeCombat(p1, p2);
+            	System.out.println("\nCLANG! ⚔️");
+                
+            	pause(100);
+                
+            	executeCombat(p1, p2);
             }
 
             if (hits == 3 && (!p1.isAlive() || !p2.isAlive())) {
-                out.println("⚡ CRITICAL COLLISION! Elite duel resolved in three exchanges!");
+            	System.out.println("⚡ CRITICAL COLLISION! Elite duel resolved in three exchanges!");
             }
         }
     }
@@ -238,51 +292,57 @@ public class Battle {
         if (redArmy == null || blackArmy == null) {
             throw new IllegalArgumentException("Armies must not be null.");
         }
+        
         int round = 1;
         int redTotal = redArmy.getTotalCount();
         int blackTotal = blackArmy.getTotalCount();
 
         while (redArmy.getAliveCount() > 0 && blackArmy.getAliveCount() > 0) {
-            out.println("\n----------------------------------------------------------------------");
-            out.println("🏹 BATTLEFIELD ENGAGEMENT - ROUND " + round);
-            out.println("🔴 Crimson Dynasty: " + redArmy.getAliveCount() + "/" + redTotal
+        	System.out.println("\n----------------------------------------------------------------------");
+        	System.out.println("🏹 BATTLEFIELD ENGAGEMENT - ROUND " + round);
+        	System.out.println("🔴 Crimson Dynasty: " + redArmy.getAliveCount() + "/" + redTotal
                     + " Active | ⚫ Obsidian Kingdom: " + blackArmy.getAliveCount() + "/" + blackTotal + " Active");
-            out.println("----------------------------------------------------------------------");
+        	System.out.println("----------------------------------------------------------------------");
 
             Soldier p1 = redArmy.selectCombatant(rand);
             Soldier p2 = blackArmy.selectCombatant(rand);
 
             if (p1.getRank() == Rank.EMPEROR && redArmy.getAliveCount() == 1) {
-                out.println("👑 THE MONARCH STANDS ALONE! " + redArmy.getName() + "'s Emperor enters the battlefield!");
+            	System.out.println("👑 THE MONARCH STANDS ALONE! " + redArmy.getName() + "'s Emperor enters the battlefield!");
             }
             if (p2.getRank() == Rank.EMPEROR && blackArmy.getAliveCount() == 1) {
-                out.println("👑 THE MONARCH STANDS ALONE! " + blackArmy.getName() + "'s Emperor enters the battlefield!");
+            	System.out.println("👑 THE MONARCH STANDS ALONE! " + blackArmy.getName() + "'s Emperor enters the battlefield!");
             }
 
             runSkirmish(p1, redArmy, p2, blackArmy);
 
-            out.println("\n========== SKIRMISH REPORT ==========");
+            System.out.println("\n========== SKIRMISH REPORT ==========");
+            
             if (!p1.isAlive()) {
                 out.println("💀 " + redArmy.getName() + " [" + p1.getRank().getDisplayName() + "] " + p1.getStatusString());
             }
             if (!p2.isAlive()) {
                 out.println("💀 " + blackArmy.getName() + " [" + p2.getRank().getDisplayName() + "] " + p2.getStatusString());
             }
-            out.println("🔴 Remaining Crimson Troops: " + redArmy.getAliveCount());
-            out.println("⚫ Remaining Obsidian Troops: " + blackArmy.getAliveCount());
+            
+            System.out.println("🔴 Remaining Crimson Troops: " + redArmy.getAliveCount());
+            System.out.println("⚫ Remaining Obsidian Troops: " + blackArmy.getAliveCount());
 
             round++;
+            
             pause(400);
         }
 
-        out.println("\n======================================================================");
-        out.println("🏆 TOTAL ANNIHILATION SEQUENCE RESOLVED 🏆");
-        out.println("======================================================================");
+        System.out.println("\n======================================================================");
+        System.out.println("🏆 TOTAL ANNIHILATION SEQUENCE RESOLVED 🏆");
+        System.out.println("======================================================================");
+        
         Army winner = redArmy.getAliveCount() == 0 ? blackArmy : redArmy;
-        out.println("🎉 TRIUMPHANT VICTORY: " + winner.getName() + "! Every enemy combatant has fallen.");
-        out.println("\nFINAL STATISTICS:");
-        out.println("🔴 Crimson Dynasty Survivors: " + redArmy.getAliveCount());
-        out.println("⚫ Obsidian Kingdom Survivors: " + blackArmy.getAliveCount());
-        out.println("⚔️ Total Battlefield Rounds: " + (round - 1));
+        
+        System.out.println("🎉 TRIUMPHANT VICTORY: " + winner.getName() + "! Every enemy combatant has fallen.");
+        System.out.println("\nFINAL STATISTICS:");
+        System.out.println("🔴 Crimson Dynasty Survivors: " + redArmy.getAliveCount());
+        System.out.println("⚫ Obsidian Kingdom Survivors: " + blackArmy.getAliveCount());
+        System.out.println("⚔️ Total Battlefield Rounds: " + (round - 1));
     }
 }

@@ -5,6 +5,7 @@ class SoldierTest {
     @Test
     void negativeDamageIsRejected() {
         Soldier s = new Soldier("Red", Rank.INFANTRY);
+        
         assertThrows(IllegalArgumentException.class, () -> s.takeDamage(-1));
         assertEquals(3, s.getCurrentArmor());
     }
@@ -19,7 +20,9 @@ class SoldierTest {
     @Test
     void lethalDamageKillsAndClampsArmorToZero() {
         Soldier s = new Soldier("Red", Rank.INFANTRY);
+        
         s.takeDamage(99);
+        
         assertFalse(s.isAlive());
         assertEquals(0, s.getCurrentArmor());
     }
@@ -27,8 +30,10 @@ class SoldierTest {
     @Test
     void resetArmorDoesNotReviveDeadSoldier() {
         Soldier s = new Soldier("Red", Rank.INFANTRY);
+        
         s.takeDamage(99);
         s.resetArmor();
+        
         assertFalse(s.isAlive());
         assertEquals(0, s.getCurrentArmor());
     }

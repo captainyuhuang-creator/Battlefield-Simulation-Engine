@@ -11,16 +11,28 @@ public class Soldier {
         if (rank == null) {
             throw new IllegalArgumentException("Rank must not be null.");
         }
+        
         this.team = team;
         this.rank = rank;
         this.currentArmor = rank.getMaxArmor();
         this.alive = true;
     }
 
-    public String getTeam() { return team; }
-    public Rank getRank() { return rank; }
-    public int getCurrentArmor() { return currentArmor; }
-    public boolean isAlive() { return alive; }
+    public String getTeam() { 
+    	return team; 
+    }
+    
+    public Rank getRank() { 
+    	return rank; 
+    }
+    
+    public int getCurrentArmor() { 
+    	return currentArmor; 
+    }
+    
+    public boolean isAlive() { 
+    	return alive; 
+    }
 
     /** Applies damage. Negative damage is rejected; a dead soldier ignores further damage. */
     public void takeDamage(int damage) {
@@ -30,9 +42,12 @@ public class Soldier {
         if (!alive) {
             return;
         }
+        
         currentArmor -= damage;
+        
         if (currentArmor <= 0) {
             currentArmor = 0;
+            
             alive = false;
         }
     }
@@ -47,6 +62,7 @@ public class Soldier {
         if (!alive) {
             return "[KIA - Card Flipped Face-Down Into Graveyard Area]";
         }
+        
         return "[ACTIVE] Armor Integrity: " + currentArmor + "/" + rank.getMaxArmor();
     }
 }

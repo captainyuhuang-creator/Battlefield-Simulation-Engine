@@ -16,7 +16,15 @@ public enum Rank {
         this.speed = speed;
     }
 
-    public String getDisplayName() { return displayName; }
-    public int getMaxArmor() { return maxArmor; }
-    public int getSpeed() { return speed; }
+    public String getDisplayName() { 
+    	return displayName; 
+    }
+    
+    public int getMaxArmor() { 
+    	return maxArmor; 
+    }
+    
+    public int getSpeed() { 
+    	return speed; 
+    }
 }
